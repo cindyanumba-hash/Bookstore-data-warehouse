@@ -1,0 +1,2762 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/19/2026 12:20:40 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="COCO"
+  DTS:CreatorName="COCO\cindy"
+  DTS:DTSID="{92307C8F-C674-4A74-A781-1A51DBDAE06D}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="02_Transform_Load_Warehouse"
+  DTS:PackageType="5"
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{950CE263-A473-4F30-A1BC-A4D0FEEF24E0}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CM_GravityDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{0CA9CAB9-06B3-413F-AF4A-A0C93E222F36}"
+      DTS:ObjectName="CM_GravityDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=GravityDW;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-02_Transform_Load_Warehouse-{0CA9CAB9-06B3-413F-AF4A-A0C93E222F36}localhost.GravityDW;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT_Load_DimBook"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{166EC243-8721-40CA-915A-B21C19D1E239}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT_Load_DimBook"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT_Load_DimBook\DST_DimBook"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST_DimBook"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dw].[DimBook]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Load_DimBook\DST_DimBook.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CM_GravityDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CM_GravityDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input].Columns[SourceBookID]"
+                      cachedDataType="i4"
+                      cachedName="SourceBookID"
+                      externalMetadataColumnId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input].ExternalColumns[SourceBookID]"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].Columns[SourceBookID]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input].Columns[Title]"
+                      cachedDataType="wstr"
+                      cachedLength="400"
+                      cachedName="Title"
+                      externalMetadataColumnId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].Columns[Title]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input].Columns[ISBN13]"
+                      cachedDataType="wstr"
+                      cachedLength="13"
+                      cachedName="ISBN13"
+                      externalMetadataColumnId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input].ExternalColumns[ISBN13]"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].Columns[ISBN13]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input].Columns[LanguageCode]"
+                      cachedDataType="wstr"
+                      cachedLength="8"
+                      cachedName="LanguageCode"
+                      externalMetadataColumnId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input].ExternalColumns[LanguageCode]"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].Columns[LanguageCode]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input].Columns[LanguageName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LanguageName"
+                      externalMetadataColumnId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input].ExternalColumns[LanguageName]"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].Columns[LanguageName]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input].Columns[LanguageGroup]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="LanguageGroup"
+                      externalMetadataColumnId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input].ExternalColumns[LanguageGroup]"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].Columns[LanguageGroup]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input].ExternalColumns[BookKey]"
+                      dataType="i4"
+                      name="BookKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input].ExternalColumns[SourceBookID]"
+                      dataType="i4"
+                      name="SourceBookID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      dataType="wstr"
+                      length="400"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input].ExternalColumns[ISBN13]"
+                      dataType="wstr"
+                      length="13"
+                      name="ISBN13" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input].ExternalColumns[LanguageCode]"
+                      dataType="wstr"
+                      length="8"
+                      name="LanguageCode" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input].ExternalColumns[LanguageName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LanguageName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input].ExternalColumns[LanguageGroup]"
+                      dataType="wstr"
+                      length="30"
+                      name="LanguageGroup" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_DimBook\DST_DimBook.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_DimBook\DST_DimBook.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimBook\DST_DimBook.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimBook\DST_DimBook.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimBook\DST_DimBook.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_DimBook\SRC_Prepared_Book"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC_Prepared_Book"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    p.SourceBookID,
+    p.Title,
+    p.ISBN13,
+    p.LanguageCode,
+    p.LanguageName,
+    p.LanguageGroup
+FROM etl.vwBookPrepared p
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM dw.DimBook d
+    WHERE d.SourceBookID = p.SourceBookID
+);</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CM_GravityDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CM_GravityDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].Columns[SourceBookID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].ExternalColumns[SourceBookID]"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].Columns[SourceBookID]"
+                      name="SourceBookID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].Columns[Title]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].ExternalColumns[Title]"
+                      length="400"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].Columns[Title]"
+                      name="Title"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].Columns[ISBN13]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].ExternalColumns[ISBN13]"
+                      length="13"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].Columns[ISBN13]"
+                      name="ISBN13"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].Columns[LanguageCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].ExternalColumns[LanguageCode]"
+                      length="8"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].Columns[LanguageCode]"
+                      name="LanguageCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].Columns[LanguageName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].ExternalColumns[LanguageName]"
+                      length="50"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].Columns[LanguageName]"
+                      name="LanguageName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].Columns[LanguageGroup]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].ExternalColumns[LanguageGroup]"
+                      length="30"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].Columns[LanguageGroup]"
+                      name="LanguageGroup"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].ExternalColumns[SourceBookID]"
+                      dataType="i4"
+                      name="SourceBookID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].ExternalColumns[Title]"
+                      dataType="wstr"
+                      length="400"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].ExternalColumns[ISBN13]"
+                      dataType="wstr"
+                      length="13"
+                      name="ISBN13" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].ExternalColumns[LanguageCode]"
+                      dataType="wstr"
+                      length="8"
+                      name="LanguageCode" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].ExternalColumns[LanguageName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LanguageName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output].ExternalColumns[LanguageGroup]"
+                      dataType="wstr"
+                      length="30"
+                      name="LanguageGroup" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Error Output].Columns[SourceBookID]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Error Output].Columns[SourceBookID]"
+                      name="SourceBookID" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Error Output].Columns[Title]"
+                      dataType="wstr"
+                      length="400"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Error Output].Columns[Title]"
+                      name="Title" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Error Output].Columns[ISBN13]"
+                      dataType="wstr"
+                      length="13"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Error Output].Columns[ISBN13]"
+                      name="ISBN13" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Error Output].Columns[LanguageCode]"
+                      dataType="wstr"
+                      length="8"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Error Output].Columns[LanguageCode]"
+                      name="LanguageCode" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Error Output].Columns[LanguageName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Error Output].Columns[LanguageName]"
+                      name="LanguageName" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Error Output].Columns[LanguageGroup]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Error Output].Columns[LanguageGroup]"
+                      name="LanguageGroup" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT_Load_DimBook.Paths[OLE DB Source Output]"
+              endId="Package\DFT_Load_DimBook\DST_DimBook.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT_Load_DimBook\SRC_Prepared_Book.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DFT_Load_DimCustomer"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{C346A906-465C-4B5B-BEE8-87FA295ED298}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT_Load_DimCustomer"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT_Load_DimCustomer\DST_DimCustomer"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST_DimCustomer"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dw].[DimCustomer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CM_GravityDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CM_GravityDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].Columns[SourceCustomerID]"
+                      cachedDataType="i4"
+                      cachedName="SourceCustomerID"
+                      externalMetadataColumnId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].ExternalColumns[SourceCustomerID]"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[SourceCustomerID]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].Columns[SurveyResponseAvailable]"
+                      cachedDataType="bool"
+                      cachedName="SurveyResponseAvailable"
+                      externalMetadataColumnId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].ExternalColumns[SurveyResponseAvailable]"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[SurveyResponseAvailable]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].Columns[PurchasePreference]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PurchasePreference"
+                      externalMetadataColumnId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].ExternalColumns[PurchasePreference]"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[PurchasePreference]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].Columns[DiscoverySource]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="DiscoverySource"
+                      externalMetadataColumnId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].ExternalColumns[DiscoverySource]"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[DiscoverySource]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].Columns[ActiveCountryCount]"
+                      cachedDataType="i4"
+                      cachedName="ActiveCountryCount"
+                      externalMetadataColumnId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].ExternalColumns[ActiveCountryCount]"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[ActiveCountryCount]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].Columns[AddressCountryCategory]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="AddressCountryCategory"
+                      externalMetadataColumnId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].ExternalColumns[AddressCountryCategory]"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[AddressCountryCategory]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].Columns[SingleActiveCountryID]"
+                      cachedDataType="i4"
+                      cachedName="SingleActiveCountryID"
+                      externalMetadataColumnId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].ExternalColumns[SingleActiveCountryID]"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[SingleActiveCountryID]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].Columns[SingleActiveCountryName]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="SingleActiveCountryName"
+                      externalMetadataColumnId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].ExternalColumns[SingleActiveCountryName]"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[SingleActiveCountryName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      dataType="i4"
+                      name="CustomerKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].ExternalColumns[SourceCustomerID]"
+                      dataType="i4"
+                      name="SourceCustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].ExternalColumns[SurveyResponseAvailable]"
+                      dataType="bool"
+                      name="SurveyResponseAvailable" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].ExternalColumns[PurchasePreference]"
+                      dataType="wstr"
+                      length="255"
+                      name="PurchasePreference" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].ExternalColumns[DiscoverySource]"
+                      dataType="wstr"
+                      length="255"
+                      name="DiscoverySource" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].ExternalColumns[ActiveCountryCount]"
+                      dataType="i4"
+                      name="ActiveCountryCount" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].ExternalColumns[AddressCountryCategory]"
+                      dataType="wstr"
+                      length="40"
+                      name="AddressCountryCategory" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].ExternalColumns[SingleActiveCountryID]"
+                      dataType="i4"
+                      name="SingleActiveCountryID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input].ExternalColumns[SingleActiveCountryName]"
+                      dataType="wstr"
+                      length="200"
+                      name="SingleActiveCountryName" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC_Prepared_Customer"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    p.SourceCustomerID,
+    p.SurveyResponseAvailable,
+    p.PurchasePreference,
+    p.DiscoverySource,
+    p.ActiveCountryCount,
+    p.AddressCountryCategory,
+    p.SingleActiveCountryID,
+    p.SingleActiveCountryName
+FROM etl.vwCustomerPrepared p
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM dw.DimCustomer d
+    WHERE d.SourceCustomerID = p.SourceCustomerID
+);</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CM_GravityDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CM_GravityDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[SourceCustomerID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].ExternalColumns[SourceCustomerID]"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[SourceCustomerID]"
+                      name="SourceCustomerID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[SurveyResponseAvailable]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].ExternalColumns[SurveyResponseAvailable]"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[SurveyResponseAvailable]"
+                      name="SurveyResponseAvailable"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[PurchasePreference]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].ExternalColumns[PurchasePreference]"
+                      length="255"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[PurchasePreference]"
+                      name="PurchasePreference"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[DiscoverySource]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].ExternalColumns[DiscoverySource]"
+                      length="255"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[DiscoverySource]"
+                      name="DiscoverySource"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[ActiveCountryCount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].ExternalColumns[ActiveCountryCount]"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[ActiveCountryCount]"
+                      name="ActiveCountryCount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[AddressCountryCategory]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].ExternalColumns[AddressCountryCategory]"
+                      length="40"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[AddressCountryCategory]"
+                      name="AddressCountryCategory"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[SingleActiveCountryID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].ExternalColumns[SingleActiveCountryID]"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[SingleActiveCountryID]"
+                      name="SingleActiveCountryID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[SingleActiveCountryName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].ExternalColumns[SingleActiveCountryName]"
+                      length="200"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].Columns[SingleActiveCountryName]"
+                      name="SingleActiveCountryName"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].ExternalColumns[SourceCustomerID]"
+                      dataType="i4"
+                      name="SourceCustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].ExternalColumns[SurveyResponseAvailable]"
+                      dataType="bool"
+                      name="SurveyResponseAvailable" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].ExternalColumns[PurchasePreference]"
+                      dataType="wstr"
+                      length="255"
+                      name="PurchasePreference" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].ExternalColumns[DiscoverySource]"
+                      dataType="wstr"
+                      length="255"
+                      name="DiscoverySource" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].ExternalColumns[ActiveCountryCount]"
+                      dataType="i4"
+                      name="ActiveCountryCount" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].ExternalColumns[AddressCountryCategory]"
+                      dataType="wstr"
+                      length="40"
+                      name="AddressCountryCategory" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].ExternalColumns[SingleActiveCountryID]"
+                      dataType="i4"
+                      name="SingleActiveCountryID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output].ExternalColumns[SingleActiveCountryName]"
+                      dataType="wstr"
+                      length="200"
+                      name="SingleActiveCountryName" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[SourceCustomerID]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[SourceCustomerID]"
+                      name="SourceCustomerID" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[SurveyResponseAvailable]"
+                      dataType="bool"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[SurveyResponseAvailable]"
+                      name="SurveyResponseAvailable" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[PurchasePreference]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[PurchasePreference]"
+                      name="PurchasePreference" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[DiscoverySource]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[DiscoverySource]"
+                      name="DiscoverySource" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[ActiveCountryCount]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[ActiveCountryCount]"
+                      name="ActiveCountryCount" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[AddressCountryCategory]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[AddressCountryCategory]"
+                      name="AddressCountryCategory" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[SingleActiveCountryID]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[SingleActiveCountryID]"
+                      name="SingleActiveCountryID" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[SingleActiveCountryName]"
+                      dataType="wstr"
+                      length="200"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[SingleActiveCountryName]"
+                      name="SingleActiveCountryName" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT_Load_DimCustomer.Paths[OLE DB Source Output]"
+              endId="Package\DFT_Load_DimCustomer\DST_DimCustomer.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DFT_Load_DimDeliveryCountry"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{24A3CB9F-9D00-4150-A933-2FF513D41C87}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT_Load_DimDeliveryCountry"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT_Load_DimDeliveryCountry\DST_DimDeliveryCountry"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST_DimDeliveryCountry"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dw].[DimDeliveryCountry]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Load_DimDeliveryCountry\DST_DimDeliveryCountry.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CM_GravityDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CM_GravityDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_DimDeliveryCountry\DST_DimDeliveryCountry.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_DimDeliveryCountry\DST_DimDeliveryCountry.Inputs[OLE DB Destination Input].Columns[SourceCountryID]"
+                      cachedDataType="i4"
+                      cachedName="SourceCountryID"
+                      externalMetadataColumnId="Package\DFT_Load_DimDeliveryCountry\DST_DimDeliveryCountry.Inputs[OLE DB Destination Input].ExternalColumns[SourceCountryID]"
+                      lineageId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Output].Columns[SourceCountryID]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_DimDeliveryCountry\DST_DimDeliveryCountry.Inputs[OLE DB Destination Input].Columns[CountryName]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="CountryName"
+                      externalMetadataColumnId="Package\DFT_Load_DimDeliveryCountry\DST_DimDeliveryCountry.Inputs[OLE DB Destination Input].ExternalColumns[CountryName]"
+                      lineageId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Output].Columns[CountryName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimDeliveryCountry\DST_DimDeliveryCountry.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryCountryKey]"
+                      dataType="i4"
+                      name="DeliveryCountryKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimDeliveryCountry\DST_DimDeliveryCountry.Inputs[OLE DB Destination Input].ExternalColumns[SourceCountryID]"
+                      dataType="i4"
+                      name="SourceCountryID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimDeliveryCountry\DST_DimDeliveryCountry.Inputs[OLE DB Destination Input].ExternalColumns[CountryName]"
+                      dataType="wstr"
+                      length="200"
+                      name="CountryName" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_DimDeliveryCountry\DST_DimDeliveryCountry.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT_Load_DimDeliveryCountry\DST_DimDeliveryCountry.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_DimDeliveryCountry\DST_DimDeliveryCountry.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimDeliveryCountry\DST_DimDeliveryCountry.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimDeliveryCountry\DST_DimDeliveryCountry.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimDeliveryCountry\DST_DimDeliveryCountry.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC_Stg_Country"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    s.country_id AS SourceCountryID,
+    CONVERT(
+        NVARCHAR(200),
+        COALESCE(
+            NULLIF(LTRIM(RTRIM(s.country_name)), ''),
+            N'Unknown country name'
+        )
+    ) AS CountryName
+FROM stg.Country s
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM dw.DimDeliveryCountry d
+    WHERE d.SourceCountryID = s.country_id
+);</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CM_GravityDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CM_GravityDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Output].Columns[SourceCountryID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Output].ExternalColumns[SourceCountryID]"
+                      lineageId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Output].Columns[SourceCountryID]"
+                      name="SourceCountryID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Output].Columns[CountryName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Output].ExternalColumns[CountryName]"
+                      length="200"
+                      lineageId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Output].Columns[CountryName]"
+                      name="CountryName"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Output].ExternalColumns[SourceCountryID]"
+                      dataType="i4"
+                      name="SourceCountryID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Output].ExternalColumns[CountryName]"
+                      dataType="wstr"
+                      length="200"
+                      name="CountryName" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Error Output].Columns[SourceCountryID]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Error Output].Columns[SourceCountryID]"
+                      name="SourceCountryID" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Error Output].Columns[CountryName]"
+                      dataType="wstr"
+                      length="200"
+                      lineageId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Error Output].Columns[CountryName]"
+                      name="CountryName" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT_Load_DimDeliveryCountry.Paths[OLE DB Source Output]"
+              endId="Package\DFT_Load_DimDeliveryCountry\DST_DimDeliveryCountry.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DFT_Load_DimOrderStatus"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{61372AEC-B512-4C70-9452-EDD3A06C3079}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT_Load_DimOrderStatus"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT_Load_DimOrderStatus\DST_DimOrderStatus"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST_DimOrderStatus"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dw].[DimOrderStatus]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Load_DimOrderStatus\DST_DimOrderStatus.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CM_GravityDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CM_GravityDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_DimOrderStatus\DST_DimOrderStatus.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_DimOrderStatus\DST_DimOrderStatus.Inputs[OLE DB Destination Input].Columns[SourceStatusID]"
+                      cachedDataType="i4"
+                      cachedName="SourceStatusID"
+                      externalMetadataColumnId="Package\DFT_Load_DimOrderStatus\DST_DimOrderStatus.Inputs[OLE DB Destination Input].ExternalColumns[SourceStatusID]"
+                      lineageId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Output].Columns[SourceStatusID]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_DimOrderStatus\DST_DimOrderStatus.Inputs[OLE DB Destination Input].Columns[StatusName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="StatusName"
+                      externalMetadataColumnId="Package\DFT_Load_DimOrderStatus\DST_DimOrderStatus.Inputs[OLE DB Destination Input].ExternalColumns[StatusName]"
+                      lineageId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Output].Columns[StatusName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimOrderStatus\DST_DimOrderStatus.Inputs[OLE DB Destination Input].ExternalColumns[OrderStatusKey]"
+                      dataType="i4"
+                      name="OrderStatusKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimOrderStatus\DST_DimOrderStatus.Inputs[OLE DB Destination Input].ExternalColumns[SourceStatusID]"
+                      dataType="i4"
+                      name="SourceStatusID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimOrderStatus\DST_DimOrderStatus.Inputs[OLE DB Destination Input].ExternalColumns[StatusName]"
+                      dataType="wstr"
+                      length="50"
+                      name="StatusName" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_DimOrderStatus\DST_DimOrderStatus.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT_Load_DimOrderStatus\DST_DimOrderStatus.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_DimOrderStatus\DST_DimOrderStatus.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimOrderStatus\DST_DimOrderStatus.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimOrderStatus\DST_DimOrderStatus.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimOrderStatus\DST_DimOrderStatus.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC_Stg_OrderStatus"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    s.status_id AS SourceStatusID,
+    CONVERT(
+        NVARCHAR(50),
+        COALESCE(
+            NULLIF(LTRIM(RTRIM(s.status_value)), ''),
+            N'Unknown status name'
+        )
+    ) AS StatusName
+FROM stg.OrderStatus s
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM dw.DimOrderStatus d
+    WHERE d.SourceStatusID = s.status_id
+);</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CM_GravityDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CM_GravityDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Output].Columns[SourceStatusID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Output].ExternalColumns[SourceStatusID]"
+                      lineageId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Output].Columns[SourceStatusID]"
+                      name="SourceStatusID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Output].Columns[StatusName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Output].ExternalColumns[StatusName]"
+                      length="50"
+                      lineageId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Output].Columns[StatusName]"
+                      name="StatusName"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Output].ExternalColumns[SourceStatusID]"
+                      dataType="i4"
+                      name="SourceStatusID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Output].ExternalColumns[StatusName]"
+                      dataType="wstr"
+                      length="50"
+                      name="StatusName" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Error Output].Columns[SourceStatusID]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Error Output].Columns[SourceStatusID]"
+                      name="SourceStatusID" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Error Output].Columns[StatusName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Error Output].Columns[StatusName]"
+                      name="StatusName" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT_Load_DimOrderStatus.Paths[OLE DB Source Output]"
+              endId="Package\DFT_Load_DimOrderStatus\DST_DimOrderStatus.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DFT_Load_FactOrderLine"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{3BB4F2B0-2701-4871-AD7E-6B7FEE069A11}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT_Load_FactOrderLine"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST_FactOrderLine"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dw].[FactOrderLine]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CM_GravityDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CM_GravityDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].Columns[SourceOrderLineID]"
+                      cachedDataType="i4"
+                      cachedName="SourceOrderLineID"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[SourceOrderLineID]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[SourceOrderLineID]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].Columns[SourceOrderID]"
+                      cachedDataType="i4"
+                      cachedName="SourceOrderID"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[SourceOrderID]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[SourceOrderID]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].Columns[OrderDateKey]"
+                      cachedDataType="i4"
+                      cachedName="OrderDateKey"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[OrderDateKey]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[OrderDateKey]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].Columns[BookKey]"
+                      cachedDataType="i4"
+                      cachedName="BookKey"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[BookKey]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[BookKey]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].Columns[CustomerKey]"
+                      cachedDataType="i4"
+                      cachedName="CustomerKey"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[CustomerKey]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].Columns[DeliveryCountryKey]"
+                      cachedDataType="i4"
+                      cachedName="DeliveryCountryKey"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryCountryKey]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[DeliveryCountryKey]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].Columns[OrderStatusKey]"
+                      cachedDataType="i4"
+                      cachedName="OrderStatusKey"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[OrderStatusKey]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[OrderStatusKey]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].Columns[OrderLineCount]"
+                      cachedDataType="i4"
+                      cachedName="OrderLineCount"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[OrderLineCount]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[OrderLineCount]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].Columns[RecordedLinePrice]"
+                      cachedDataType="numeric"
+                      cachedName="RecordedLinePrice"
+                      cachedPrecision="5"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[RecordedLinePrice]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[RecordedLinePrice]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].Columns[LoadBatchID]"
+                      cachedDataType="i4"
+                      cachedName="LoadBatchID"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[LoadBatchID]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[LoadBatchID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[OrderLineKey]"
+                      dataType="i4"
+                      name="OrderLineKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[SourceOrderLineID]"
+                      dataType="i4"
+                      name="SourceOrderLineID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[SourceOrderID]"
+                      dataType="i4"
+                      name="SourceOrderID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[OrderDateKey]"
+                      dataType="i4"
+                      name="OrderDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[BookKey]"
+                      dataType="i4"
+                      name="BookKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      dataType="i4"
+                      name="CustomerKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryCountryKey]"
+                      dataType="i4"
+                      name="DeliveryCountryKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[OrderStatusKey]"
+                      dataType="i4"
+                      name="OrderStatusKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[OrderLineCount]"
+                      dataType="i4"
+                      name="OrderLineCount" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[RecordedLinePrice]"
+                      dataType="numeric"
+                      name="RecordedLinePrice"
+                      precision="5"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input].ExternalColumns[LoadBatchID]"
+                      dataType="i4"
+                      name="LoadBatchID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC_Prepared_FactOrderLine"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    p.SourceOrderLineID,
+    p.SourceOrderID,
+    p.OrderDateKey,
+    p.BookKey,
+    p.CustomerKey,
+    p.DeliveryCountryKey,
+    p.OrderStatusKey,
+    p.OrderLineCount,
+    p.RecordedLinePrice,
+    p.LoadBatchID
+FROM etl.vwFactOrderLinePrepared AS p
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM dw.FactOrderLine AS f
+    WHERE f.SourceOrderLineID = p.SourceOrderLineID
+);</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CM_GravityDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CM_GravityDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[SourceOrderLineID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[SourceOrderLineID]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[SourceOrderLineID]"
+                      name="SourceOrderLineID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[SourceOrderID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[SourceOrderID]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[SourceOrderID]"
+                      name="SourceOrderID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[OrderDateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[OrderDateKey]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[OrderDateKey]"
+                      name="OrderDateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[BookKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[BookKey]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[BookKey]"
+                      name="BookKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[CustomerKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[CustomerKey]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[CustomerKey]"
+                      name="CustomerKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[DeliveryCountryKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[DeliveryCountryKey]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[DeliveryCountryKey]"
+                      name="DeliveryCountryKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[OrderStatusKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[OrderStatusKey]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[OrderStatusKey]"
+                      name="OrderStatusKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[OrderLineCount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[OrderLineCount]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[OrderLineCount]"
+                      name="OrderLineCount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[RecordedLinePrice]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[RecordedLinePrice]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[RecordedLinePrice]"
+                      name="RecordedLinePrice"
+                      precision="5"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[LoadBatchID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[LoadBatchID]"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].Columns[LoadBatchID]"
+                      name="LoadBatchID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[SourceOrderLineID]"
+                      dataType="i4"
+                      name="SourceOrderLineID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[SourceOrderID]"
+                      dataType="i4"
+                      name="SourceOrderID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[OrderDateKey]"
+                      dataType="i4"
+                      name="OrderDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[BookKey]"
+                      dataType="i4"
+                      name="BookKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[CustomerKey]"
+                      dataType="i4"
+                      name="CustomerKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[DeliveryCountryKey]"
+                      dataType="i4"
+                      name="DeliveryCountryKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[OrderStatusKey]"
+                      dataType="i4"
+                      name="OrderStatusKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[OrderLineCount]"
+                      dataType="i4"
+                      name="OrderLineCount" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[RecordedLinePrice]"
+                      dataType="numeric"
+                      name="RecordedLinePrice"
+                      precision="5"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output].ExternalColumns[LoadBatchID]"
+                      dataType="i4"
+                      name="LoadBatchID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[SourceOrderLineID]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[SourceOrderLineID]"
+                      name="SourceOrderLineID" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[SourceOrderID]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[SourceOrderID]"
+                      name="SourceOrderID" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[OrderDateKey]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[OrderDateKey]"
+                      name="OrderDateKey" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[BookKey]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[BookKey]"
+                      name="BookKey" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[CustomerKey]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[CustomerKey]"
+                      name="CustomerKey" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[DeliveryCountryKey]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[DeliveryCountryKey]"
+                      name="DeliveryCountryKey" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[OrderStatusKey]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[OrderStatusKey]"
+                      name="OrderStatusKey" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[OrderLineCount]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[OrderLineCount]"
+                      name="OrderLineCount" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[RecordedLinePrice]"
+                      dataType="numeric"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[RecordedLinePrice]"
+                      name="RecordedLinePrice"
+                      precision="5"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[LoadBatchID]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[LoadBatchID]"
+                      name="LoadBatchID" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT_Load_FactOrderLine.Paths[OLE DB Source Output]"
+              endId="Package\DFT_Load_FactOrderLine\DST_FactOrderLine.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_Initialize_Warehouse"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9EC77716-AEE4-442D-938E-762D449551E7}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_Initialize_Warehouse"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0CA9CAB9-06B3-413F-AF4A-A0C93E222F36}"
+          SQLTask:SqlStatementSource="SET NOCOUNT ON;&#xA;SET XACT_ABORT ON;&#xA;SET ANSI_NULLS ON;&#xA;SET QUOTED_IDENTIFIER ON;&#xA;SET ANSI_PADDING ON;&#xA;SET ANSI_WARNINGS ON;&#xA;SET ARITHABORT ON;&#xA;SET CONCAT_NULL_YIELDS_NULL ON;&#xA;SET NUMERIC_ROUNDABORT OFF;&#xA;&#xA;IF DB_NAME() &lt;&gt; N'GravityDW'&#xA;BEGIN&#xA;    THROW 51010, 'The connection must use the GravityDW database.', 1;&#xA;END;&#xA;&#xA;IF OBJECT_ID(N'dw.DimDate', N'U') IS NULL&#xA;   OR OBJECT_ID(N'dw.DimBook', N'U') IS NULL&#xA;   OR OBJECT_ID(N'dw.DimCustomer', N'U') IS NULL&#xA;   OR OBJECT_ID(N'dw.DimDeliveryCountry', N'U') IS NULL&#xA;   OR OBJECT_ID(N'dw.DimOrderStatus', N'U') IS NULL&#xA;BEGIN&#xA;    THROW 51011, 'Warehouse dimensions are missing. Run the warehouse DDL first.', 1;&#xA;END;&#xA;&#xA;DECLARE @CalendarStart DATE, @CalendarEnd DATE;&#xA;&#xA;SELECT&#xA;    @CalendarStart = DATEFROMPARTS(YEAR(MIN(order_date)), 1, 1),&#xA;    @CalendarEnd = DATEFROMPARTS(YEAR(MAX(order_date)), 12, 31)&#xA;FROM stg.CustOrder;&#xA;&#xA;IF @CalendarStart IS NULL OR @CalendarEnd IS NULL&#xA;BEGIN&#xA;    THROW 51012, 'No valid staged order dates were found; check staging extraction.', 1;&#xA;END;&#xA;&#xA;BEGIN TRY&#xA;    BEGIN TRANSACTION;&#xA;&#xA;    IF NOT EXISTS (SELECT 1 FROM dw.DimDate WHERE DateKey = 0)&#xA;    BEGIN&#xA;        INSERT INTO dw.DimDate&#xA;            (DateKey, FullDate, CalendarYear, QuarterNumber,&#xA;             MonthNumber, MonthName, YearMonth)&#xA;        VALUES (0, NULL, NULL, NULL, NULL, N'Unknown', N'Unknown');&#xA;    END;&#xA;&#xA;    -- Explicit key 0 requires IDENTITY_INSERT, one dimension at a time.&#xA;    IF NOT EXISTS (SELECT 1 FROM dw.DimBook WHERE BookKey = 0)&#xA;    BEGIN&#xA;        SET IDENTITY_INSERT dw.DimBook ON;&#xA;        INSERT INTO dw.DimBook&#xA;            (BookKey, SourceBookID, Title, ISBN13,&#xA;             LanguageCode, LanguageName, LanguageGroup)&#xA;        VALUES&#xA;            (0, NULL, N'Unknown book', NULL,&#xA;             NULL, N'Unknown language', N'Unknown / needs review');&#xA;        SET IDENTITY_INSERT dw.DimBook OFF;&#xA;    END;&#xA;&#xA;    IF NOT EXISTS (SELECT 1 FROM dw.DimCustomer WHERE CustomerKey = 0)&#xA;    BEGIN&#xA;        SET IDENTITY_INSERT dw.DimCustomer ON;&#xA;        INSERT INTO dw.DimCustomer&#xA;            (CustomerKey, SourceCustomerID, SurveyResponseAvailable,&#xA;             PurchasePreference, DiscoverySource, ActiveCountryCount,&#xA;             AddressCountryCategory, SingleActiveCountryID,&#xA;             SingleActiveCountryName)&#xA;        VALUES&#xA;            (0, NULL, NULL, N'Unknown customer', N'Unknown customer',&#xA;             NULL, N'Unknown customer', NULL, NULL);&#xA;        SET IDENTITY_INSERT dw.DimCustomer OFF;&#xA;    END;&#xA;&#xA;    IF NOT EXISTS (&#xA;        SELECT 1 FROM dw.DimDeliveryCountry WHERE DeliveryCountryKey = 0&#xA;    )&#xA;    BEGIN&#xA;        SET IDENTITY_INSERT dw.DimDeliveryCountry ON;&#xA;        INSERT INTO dw.DimDeliveryCountry&#xA;            (DeliveryCountryKey, SourceCountryID, CountryName)&#xA;        VALUES (0, NULL, N'Unknown delivery country');&#xA;        SET IDENTITY_INSERT dw.DimDeliveryCountry OFF;&#xA;    END;&#xA;&#xA;    IF NOT EXISTS (SELECT 1 FROM dw.DimOrderStatus WHERE OrderStatusKey = 0)&#xA;    BEGIN&#xA;        SET IDENTITY_INSERT dw.DimOrderStatus ON;&#xA;        INSERT INTO dw.DimOrderStatus&#xA;            (OrderStatusKey, SourceStatusID, StatusName)&#xA;        VALUES (0, NULL, N'Unknown / no recorded status');&#xA;        SET IDENTITY_INSERT dw.DimOrderStatus OFF;&#xA;    END;&#xA;&#xA;    -- Build a continuous calendar, adding only dates not already present.&#xA;    ;WITH CalendarDates AS (&#xA;        SELECT @CalendarStart AS CalendarDate&#xA;        UNION ALL&#xA;        SELECT DATEADD(DAY, 1, CalendarDate)&#xA;        FROM CalendarDates&#xA;        WHERE CalendarDate &lt; @CalendarEnd&#xA;    )&#xA;    INSERT INTO dw.DimDate&#xA;        (DateKey, FullDate, CalendarYear, QuarterNumber,&#xA;         MonthNumber, MonthName, YearMonth)&#xA;    SELECT&#xA;        CONVERT(INT, CONVERT(CHAR(8), d.CalendarDate, 112)),&#xA;        d.CalendarDate,&#xA;        YEAR(d.CalendarDate),&#xA;        DATEPART(QUARTER, d.CalendarDate),&#xA;        MONTH(d.CalendarDate),&#xA;        CASE MONTH(d.CalendarDate)&#xA;            WHEN 1 THEN N'January' WHEN 2 THEN N'February'&#xA;            WHEN 3 THEN N'March' WHEN 4 THEN N'April'&#xA;            WHEN 5 THEN N'May' WHEN 6 THEN N'June'&#xA;            WHEN 7 THEN N'July' WHEN 8 THEN N'August'&#xA;            WHEN 9 THEN N'September' WHEN 10 THEN N'October'&#xA;            WHEN 11 THEN N'November' WHEN 12 THEN N'December'&#xA;        END,&#xA;        CONVERT(CHAR(7), d.CalendarDate, 126)&#xA;    FROM CalendarDates d&#xA;    WHERE NOT EXISTS (&#xA;        SELECT 1 FROM dw.DimDate existing&#xA;        WHERE existing.FullDate = d.CalendarDate&#xA;    )&#xA;    OPTION (MAXRECURSION 0);&#xA;&#xA;    COMMIT TRANSACTION;&#xA;END TRY&#xA;BEGIN CATCH&#xA;    IF XACT_STATE() &lt;&gt; 0 ROLLBACK TRANSACTION;&#xA;    -- Reset session settings even if an insertion failed while identity was ON.&#xA;    SET IDENTITY_INSERT dw.DimBook OFF;&#xA;    SET IDENTITY_INSERT dw.DimCustomer OFF;&#xA;    SET IDENTITY_INSERT dw.DimDeliveryCountry OFF;&#xA;    SET IDENTITY_INSERT dw.DimOrderStatus OFF;&#xA;    THROW;&#xA;END CATCH;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_Update_Country_And_Status"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B45BCA0C-C4CB-4CC0-8B16-B48DECC3B232}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_Update_Country_And_Status"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0CA9CAB9-06B3-413F-AF4A-A0C93E222F36}"
+          SQLTask:SqlStatementSource="SET NOCOUNT ON;&#xA;SET ANSI_NULLS ON;&#xA;SET QUOTED_IDENTIFIER ON;&#xA;SET ANSI_PADDING ON;&#xA;SET ANSI_WARNINGS ON;&#xA;SET ARITHABORT ON;&#xA;SET CONCAT_NULL_YIELDS_NULL ON;&#xA;SET NUMERIC_ROUNDABORT OFF;&#xA;&#xA;UPDATE d&#xA;SET CountryName = CONVERT(&#xA;    NVARCHAR(200),&#xA;    COALESCE(&#xA;        NULLIF(LTRIM(RTRIM(s.country_name)), ''),&#xA;        N'Unknown country name'&#xA;    )&#xA;)&#xA;FROM dw.DimDeliveryCountry d&#xA;JOIN stg.Country s ON s.country_id = d.SourceCountryID;&#xA;&#xA;UPDATE d&#xA;SET StatusName = CONVERT(&#xA;    NVARCHAR(50),&#xA;    COALESCE(&#xA;        NULLIF(LTRIM(RTRIM(s.status_value)), ''),&#xA;        N'Unknown status name'&#xA;    )&#xA;)&#xA;FROM dw.DimOrderStatus d&#xA;JOIN stg.OrderStatus s ON s.status_id = d.SourceStatusID;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_Update_DimBook"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{157D39A4-128D-4066-9023-A02BD45C463C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_Update_DimBook"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0CA9CAB9-06B3-413F-AF4A-A0C93E222F36}"
+          SQLTask:SqlStatementSource="SET NOCOUNT ON;&#xA;SET ANSI_NULLS ON;&#xA;SET QUOTED_IDENTIFIER ON;&#xA;SET ANSI_PADDING ON;&#xA;SET ANSI_WARNINGS ON;&#xA;SET ARITHABORT ON;&#xA;SET CONCAT_NULL_YIELDS_NULL ON;&#xA;SET NUMERIC_ROUNDABORT OFF;&#xA;&#xA;UPDATE d&#xA;SET&#xA;    Title = p.Title,&#xA;    ISBN13 = p.ISBN13,&#xA;    LanguageCode = p.LanguageCode,&#xA;    LanguageName = p.LanguageName,&#xA;    LanguageGroup = p.LanguageGroup&#xA;FROM dw.DimBook d&#xA;JOIN etl.vwBookPrepared p&#xA;    ON p.SourceBookID = d.SourceBookID;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_Update_DimCustomer"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D8A23D93-1A83-43BD-8DC0-8435B8A1B6D4}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_Update_DimCustomer"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0CA9CAB9-06B3-413F-AF4A-A0C93E222F36}"
+          SQLTask:SqlStatementSource="SET NOCOUNT ON;&#xA;SET ANSI_NULLS ON;&#xA;SET QUOTED_IDENTIFIER ON;&#xA;SET ANSI_PADDING ON;&#xA;SET ANSI_WARNINGS ON;&#xA;SET ARITHABORT ON;&#xA;SET CONCAT_NULL_YIELDS_NULL ON;&#xA;SET NUMERIC_ROUNDABORT OFF;&#xA;&#xA;UPDATE d&#xA;SET&#xA;    SurveyResponseAvailable = p.SurveyResponseAvailable,&#xA;    PurchasePreference = p.PurchasePreference,&#xA;    DiscoverySource = p.DiscoverySource,&#xA;    ActiveCountryCount = p.ActiveCountryCount,&#xA;    AddressCountryCategory = p.AddressCountryCategory,&#xA;    SingleActiveCountryID = p.SingleActiveCountryID,&#xA;    SingleActiveCountryName = p.SingleActiveCountryName&#xA;FROM dw.DimCustomer d&#xA;JOIN etl.vwCustomerPrepared p&#xA;    ON p.SourceCustomerID = d.SourceCustomerID;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_Validate_And_Update_FactOrderLine"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{3FC99338-E969-4F37-8826-E0697DECFC7F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_Validate_And_Update_FactOrderLine"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0CA9CAB9-06B3-413F-AF4A-A0C93E222F36}"
+          SQLTask:SqlStatementSource="EXEC etl.uspValidateAndUpdateFactOrderLine @ApplyUpdates = 1;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{41451781-17EB-45FA-9471-E3083DC03967}"
+      DTS:From="Package\SQL_Initialize_Warehouse"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\SQL_Update_Country_And_Status" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{110C5B0A-1E75-4600-9528-CD033CACCD7D}"
+      DTS:From="Package\SQL_Update_Country_And_Status"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\DFT_Load_DimDeliveryCountry" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{307DF568-3165-4772-936A-A7345B54D15E}"
+      DTS:From="Package\DFT_Load_DimDeliveryCountry"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\DFT_Load_DimOrderStatus" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{D20A1A03-19B1-42F6-96CB-ED20EB2F4046}"
+      DTS:From="Package\DFT_Load_DimOrderStatus"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\SQL_Update_DimBook" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{499AF6DA-E1F9-4BD8-B574-B009F25077B3}"
+      DTS:From="Package\SQL_Update_DimBook"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\DFT_Load_DimBook" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{B183AA18-F9FF-43E7-B5D6-F171C838A95D}"
+      DTS:From="Package\DFT_Load_DimBook"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\SQL_Update_DimCustomer" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{774891D8-AEC6-4D7D-9308-0F1EAA2FCA0F}"
+      DTS:From="Package\SQL_Update_DimCustomer"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\DFT_Load_DimCustomer" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{185590CC-F155-42A7-AC35-43FEC1ECCE3D}"
+      DTS:From="Package\DFT_Load_DimCustomer"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\SQL_Validate_And_Update_FactOrderLine" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{56C2997D-3E96-4677-893C-83A34155A1A2}"
+      DTS:From="Package\SQL_Validate_And_Update_FactOrderLine"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\DFT_Load_FactOrderLine" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="177,42"
+          Id="Package\DFT_Load_DimBook"
+          TopLeft="64.5,402.458331334301" />
+        <NodeLayout
+          Size="198.5,42"
+          Id="Package\DFT_Load_DimCustomer"
+          TopLeft="57.5,557.916663895465" />
+        <NodeLayout
+          Size="228,42"
+          Id="Package\DFT_Load_DimDeliveryCountry"
+          TopLeft="35,172.249999144425" />
+        <NodeLayout
+          Size="209.5,42"
+          Id="Package\DFT_Load_DimOrderStatus"
+          TopLeft="45.5,250.249998756995" />
+        <NodeLayout
+          Size="201.5,42"
+          Id="Package\DFT_Load_FactOrderLine"
+          TopLeft="53.3333333333334,748.402774060421" />
+        <NodeLayout
+          Size="203.5,42"
+          Id="Package\SQL_Initialize_Warehouse"
+          TopLeft="38.5,23.2916665509758" />
+        <NodeLayout
+          Size="242.5,42"
+          Id="Package\SQL_Update_Country_And_Status"
+          TopLeft="26,98.0416661796885" />
+        <NodeLayout
+          Size="188,46"
+          Id="Package\SQL_Update_DimBook"
+          TopLeft="55,321.74999840185" />
+        <NodeLayout
+          Size="209.5,42"
+          Id="Package\SQL_Update_DimCustomer"
+          TopLeft="52,482.083330938799" />
+        <NodeLayout
+          Size="281,56.5"
+          Id="Package\SQL_Validate_And_Update_FactOrderLine"
+          TopLeft="20.8333333333333,639.166663491892" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="143.75,65.2916665509757">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.7499996287127"
+              Start="0,0"
+              End="0,25.2499996287127">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.2499996287127" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="148.125,140.041666179688">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.2083329647366"
+              Start="0,0"
+              End="0,24.7083329647366">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.7083329647366" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="149.625,214.249999144425">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.9999996125698"
+              Start="0,0"
+              End="0,28.4999996125698">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.4999996125698" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="149.625,292.249998756995">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.4999996448556"
+              Start="0,0"
+              End="0,21.9999996448556">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.9999996448556" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="151,367.74999840185">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.7083329324507"
+              Start="0,0"
+              End="0,27.2083329324507">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.2083329324507" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="154.875,444.458331334301">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.6249996044984"
+              Start="0,0"
+              End="0,30.1249996044984">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.1249996044984" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="156.75,524.083330938799">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.8333329566651"
+              Start="0,0"
+              End="0,26.3333329566651">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.3333329566651" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="159.041666666667,599.916663895465">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.249999596427"
+              Start="0,0"
+              End="0,31.749999596427">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.749999596427" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="157.708333333333,695.666663491892">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52.7361105685294"
+              Start="0,0"
+              End="0,45.2361105685294">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.2361105685294" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT_Load_DimBook">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="180,42"
+          Id="Package\DFT_Load_DimBook\SRC_Prepared_Book"
+          TopLeft="294,289" />
+        <NodeLayout
+          Size="148.5,42"
+          Id="Package\DFT_Load_DimBook\DST_DimBook"
+          TopLeft="308,424.769230769231" />
+        <EdgeLayout
+          Id="Package\DFT_Load_DimBook.Paths[OLE DB Source Output]"
+          TopLeft="383.125,331">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,93.7692307692308"
+              Start="0,0"
+              End="0,86.2692307692308">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,86.2692307692308" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_DimBook\DST_DimBook">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_DimBook\SRC_Prepared_Book">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DFT_Load_DimCustomer">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="201.5,42"
+          Id="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer"
+          TopLeft="261,248.307692307692" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\DFT_Load_DimCustomer\DST_DimCustomer"
+          TopLeft="283,363.307692307692" />
+        <EdgeLayout
+          Id="Package\DFT_Load_DimCustomer.Paths[OLE DB Source Output]"
+          TopLeft="364.875,290.307692307692">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,73.0000000000001"
+              Start="0,0"
+              End="0,65.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,65.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_DimCustomer\DST_DimCustomer">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_DimCustomer\SRC_Prepared_Customer">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DFT_Load_DimDeliveryCountry">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="165.5,42"
+          Id="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country"
+          TopLeft="130,192.83333237552" />
+        <NodeLayout
+          Size="199.5,42"
+          Id="Package\DFT_Load_DimDeliveryCountry\DST_DimDeliveryCountry"
+          TopLeft="108,291.416665219184" />
+        <EdgeLayout
+          Id="Package\DFT_Load_DimDeliveryCountry.Paths[OLE DB Source Output]"
+          TopLeft="210.25,234.83333237552">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.5833328436646"
+              Start="0,0"
+              End="0,49.0833328436646">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.0833328436646" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_DimDeliveryCountry\DST_DimDeliveryCountry">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_DimDeliveryCountry\SRC_Stg_Country">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DFT_Load_DimOrderStatus">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="185,42"
+          Id="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus"
+          TopLeft="203.666666666667,190" />
+        <NodeLayout
+          Size="181,42"
+          Id="Package\DFT_Load_DimOrderStatus\DST_DimOrderStatus"
+          TopLeft="200.833333333333,350.833333333333" />
+        <EdgeLayout
+          Id="Package\DFT_Load_DimOrderStatus.Paths[OLE DB Source Output]"
+          TopLeft="293.75,232">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,118.833333333333"
+              Start="0,0"
+              End="0,111.333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,111.333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_DimOrderStatus\DST_DimOrderStatus">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_DimOrderStatus\SRC_Stg_OrderStatus">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DFT_Load_FactOrderLine">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="223,42"
+          Id="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine"
+          TopLeft="403.666666666667,266.333333333333" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\DFT_Load_FactOrderLine\DST_FactOrderLine"
+          TopLeft="428,349.666666666667" />
+        <EdgeLayout
+          Id="Package\DFT_Load_FactOrderLine.Paths[OLE DB Source Output]"
+          TopLeft="514.833333333333,308.333333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.3333333333334"
+              Start="0,0"
+              End="0,33.8333333333334">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.8333333333334" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_FactOrderLine\DST_FactOrderLine">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_FactOrderLine\SRC_Prepared_FactOrderLine">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
